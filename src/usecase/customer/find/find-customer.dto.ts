@@ -13,4 +13,5 @@ interface OutputFindCustomerDto {
   };
 }
 
-export { InputFindCustomerDto, OutputFindCustomerDto };
+export {InputFindCustomerDto, OutputFindCustomerDto};
+

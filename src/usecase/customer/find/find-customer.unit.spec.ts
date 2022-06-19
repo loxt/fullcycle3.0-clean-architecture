@@ -1,12 +1,9 @@
-import { Sequelize } from "sequelize-typescript";
-import CustomerModel from "../../../infrastructure/customer/repository/sequelize/customer.model";
-import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
-import Customer from "../../../domain/customer/entity/customer";
-import Address from "../../../domain/customer/value-object/address";
-import FindCustomerUseCase from "./find-customer.usecase";
+import Customer from '../../../domain/customer/entity/customer';
+import Address from '../../../domain/customer/value-object/address';
+import FindCustomerUseCase from './find-customer.usecase';
 
-const customer = new Customer("123", "John");
-const address = new Address("Street", 123, "7974000", "City");
+const customer = new Customer('123', 'John');
+const address = new Address('Street', 123, '7974000', 'City');
 customer.changeAddress(address);
 
 const CustomerRepositoryMock = () => {
@@ -16,51 +13,50 @@ const CustomerRepositoryMock = () => {
     create: jest.fn(),
     update: jest.fn(),
   };
-}
+};
 
-describe("Unit Test find customer use case", () => {
-  it('should find a customer', async function () {
+describe('Unit Test find customer use case', () => {
+  it('should find a customer', async function() {
     const customerRepository = CustomerRepositoryMock();
     await customerRepository.create(customer);
 
-    const usecase =  new FindCustomerUseCase(customerRepository);
+    const usecase = new FindCustomerUseCase(customerRepository);
 
     const input = {
-      id: "123"
+      id: '123',
     };
 
     const output = {
-      id: "123",
-      name: "John",
+      id: '123',
+      name: 'John',
       address: {
-        street: "Street",
+        street: 'Street',
         number: 123,
-        zip: "7974000",
-        city: "City"
-      }
-    }
+        zip: '7974000',
+        city: 'City',
+      },
+    };
 
     const result = await usecase.execute(input);
 
     expect(result).toEqual(output);
   });
 
-  it('should not find a customer', async function () {
+  it('should not find a customer', async function() {
     const customerRepository = CustomerRepositoryMock();
     await customerRepository.findById.mockImplementation(() => {
-      throw new Error("Customer not found");
-    })
+      throw new Error('Customer not found');
+    });
 
-    const usecase =  new FindCustomerUseCase(customerRepository);
+    const usecase = new FindCustomerUseCase(customerRepository);
 
     const input = {
-      id: "123"
+      id: '123',
     };
 
 
     await expect(() => {
-      return usecase.execute(input)
-    }).rejects.toThrow("Customer not found");
-
+      return usecase.execute(input);
+    }).rejects.toThrow('Customer not found');
   });
 });
