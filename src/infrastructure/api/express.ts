@@ -1,9 +1,11 @@
 import express, {Express} from 'express';
 import {Sequelize} from 'sequelize-typescript';
 import CustomerModel from '../customer/repository/sequelize/customer.model';
+import {customersRoute} from './routes/customers.route';
 
 export const app: Express = express();
 app.use(express.json());
+app.use('/customers', customersRoute);
 
 export let sequelize: Sequelize;
 
