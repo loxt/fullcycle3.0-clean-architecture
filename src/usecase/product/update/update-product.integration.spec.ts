@@ -36,7 +36,7 @@ describe('Test update product use case', () => {
   it('should update a product', async () => {
     const productRepository = new ProductRepository();
 
-    const product = new Product('1', 'Product 1', 100.34);
+    const product = new Product('1', 'Product 1', 200);
     await productRepository.create(product);
 
     const usecase = new UpdateProductUseCase(productRepository);
