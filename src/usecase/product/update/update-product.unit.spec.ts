@@ -7,7 +7,7 @@ const product = new Product(uuid(), 'Product 1', 100);
 const input = {
   id: product.id,
   name: product.name,
-  price: product.price,
+  price: 200,
 };
 
 const ProductRepositoryMock = () => {
