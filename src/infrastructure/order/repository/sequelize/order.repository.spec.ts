@@ -22,7 +22,8 @@ describe('Order repository unit tests', function() {
       logging: false,
       sync: {force: true},
     });
-    sequelize.addModels([
+
+    await sequelize.addModels([
       CustomerModel,
       OrderModel,
       OrderItemModel,
