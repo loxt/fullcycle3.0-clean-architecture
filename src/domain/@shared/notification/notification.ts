@@ -10,11 +10,11 @@ export default class Notification {
     this.errors.push(error);
   }
 
-  messages(context: string): string {
+  messages(context?: string): string {
     return this.errors
-        .filter((error) => error.context === context)
+        .filter((error) => context ? error.context === context : error)
         .map((error) => {
-          if (error.context === context) {
+          if (context === undefined || error.context === context) {
             return `${error.context}: ${error.message}`;
           }
         })

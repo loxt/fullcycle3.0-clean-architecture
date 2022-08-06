@@ -26,6 +26,8 @@ describe('Unit tests for notifications', function() {
     notification.addError(error3);
     expect(notification.messages('customer')).toBe('customer: error message, customer: error message 2');
     expect(notification.messages('checkout')).toBe('checkout: error message 3');
+
+    expect(notification.messages()).toBe('customer: error message, customer: error message 2, checkout: error message 3');
   });
 });
 
