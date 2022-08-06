@@ -29,5 +29,12 @@ describe('Unit tests for notifications', function() {
 
     expect(notification.messages()).toBe('customer: error message, customer: error message 2, checkout: error message 3');
   });
+
+  it('should check if notification has at least one error', function() {
+    const notification = new Notification();
+    expect(notification.hasErrors()).toBe(false);
+    notification.addError({message: 'error message', context: 'customer'});
+    expect(notification.hasErrors()).toBe(true);
+  });
 });
 

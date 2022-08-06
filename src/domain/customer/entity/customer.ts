@@ -1,14 +1,19 @@
 import Address from '../value-object/address';
+import Entity from '../../@shared/entity/entity.abstract';
 
-export default class Customer {
+export default class Customer extends Entity {
   constructor(
-    private _id: string,
     private _name: string,
     public address?: Address,
     private active: boolean = false,
     private _rewardPoints: number = 0,
   ) {
+    super();
     this.validate();
+
+    if (this.notification.hasErrors()) {
+      throw new Error(this.notification.messages());
+    }
   }
 
   get rewardPoints(): number {
@@ -17,10 +22,6 @@ export default class Customer {
 
   changeAddress(address: Address): void {
     this.address = address;
-  }
-
-  get id(): string {
-    return this._id;
   }
 
   get name(): string {
@@ -32,11 +33,17 @@ export default class Customer {
   }
 
   validate() {
-    if (this._id.length === 0) {
-      throw new Error('Id is required');
+    if (this.id.length === 0) {
+      this.notification.addError({
+        context: 'customer',
+        message: 'Id is required',
+      });
     }
     if (this.name.length === 0) {
-      throw new Error('Name is required');
+      this.notification.addError({
+        context: 'customer',
+        message: 'Name is required',
+      });
     }
   }
 
