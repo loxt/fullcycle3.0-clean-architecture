@@ -1,6 +1,6 @@
-import CustomerRepositoryInterface from "../../../domain/customer/repository/customer-repository.interface";
-import { InputUpdateCustomerDto, OutputUpdateCustomerDto } from "./update-customer.dto";
-import Address from "../../../domain/customer/value-object/address";
+import CustomerRepositoryInterface from '../../../domain/customer/repository/customer-repository.interface';
+import {InputUpdateCustomerDto, OutputUpdateCustomerDto} from './update-customer.dto';
+import Address from '../../../domain/customer/value-object/address';
 
 export default class UpdateCustomerUseCase {
   constructor(private readonly customerRepository: CustomerRepositoryInterface) {}
@@ -18,9 +18,8 @@ export default class UpdateCustomerUseCase {
         street: customer.address.street,
         number: customer.address.number,
         zip: customer.address.zip,
-        city: customer.address.city
-      }
+        city: customer.address.city,
+      },
     };
   }
-
 }

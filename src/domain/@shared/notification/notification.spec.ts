@@ -36,5 +36,17 @@ describe('Unit tests for notifications', function() {
     notification.addError({message: 'error message', context: 'customer'});
     expect(notification.hasErrors()).toBe(true);
   });
+
+  it('should get all errors props', function() {
+    const notification = new Notification();
+    notification.addError({message: 'error message', context: 'customer'});
+    notification.addError({message: 'error message 2', context: 'customer'});
+    notification.addError({message: 'error message 3', context: 'checkout'});
+    expect(notification.getErrors()).toEqual([
+      {message: 'error message', context: 'customer'},
+      {message: 'error message 2', context: 'customer'},
+      {message: 'error message 3', context: 'checkout'},
+    ]);
+  });
 });
 

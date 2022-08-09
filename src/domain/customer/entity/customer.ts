@@ -1,18 +1,20 @@
 import Address from '../value-object/address';
 import Entity from '../../@shared/entity/entity.abstract';
+import NotificationError from '../../@shared/notification/notification.error';
 
 export default class Customer extends Entity {
   constructor(
+      id: string,
     private _name: string,
     public address?: Address,
     private active: boolean = false,
     private _rewardPoints: number = 0,
   ) {
     super();
+    this._id = id;
     this.validate();
-
     if (this.notification.hasErrors()) {
-      throw new Error(this.notification.messages());
+      throw new NotificationError(this.notification.getErrors());
     }
   }
 
